@@ -1,0 +1,4 @@
+langchain==0.0.144
+notion_client==2.0.0
+pinecone_client==2.2.1
+python-dotenv==1.0.0
