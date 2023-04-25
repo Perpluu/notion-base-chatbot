@@ -125,11 +125,11 @@ class NotionPage(NotionDBLoader):
         
 NotionPage1 = NotionPage(NOTION_SECRET, NOTION_PAGE)
 loader = NotionPage1
-docs = loader.load()
-docs = [d for d in docs if d.page_content.strip()]
+# docs = loader.load()
+# docs = [d for d in docs if d.page_content.strip()]
 
 embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY)
-docsearch = Pinecone.from_documents(docs, embeddings, index_name=index_name)
+docsearch = Pinecone.from_existing_index(index_name=index_name, embedding=embeddings)
 
 
 llm = OpenAI(temperature=0, openai_api_key=OPENAI_KEY)
