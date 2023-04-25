@@ -5,3 +5,4 @@ python-dotenv==1.0.0
 tiktoken==0.3.3
 openai==0.27.4
 fastapi==0.95.1
+slack-bolt==1.17.2

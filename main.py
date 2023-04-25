@@ -11,7 +11,9 @@ from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 from typing import List, Dict, Any
 import os
-from dotenv import load_dotenv   
+import requests
+from dotenv import load_dotenv
+import views
 load_dotenv()
 
 PINECONE_KEY = os.environ.get('PINECONE_KEY')
@@ -129,16 +131,7 @@ docs = [d for d in docs if d.page_content.strip()]
 embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY)
 docsearch = Pinecone.from_documents(docs, embeddings, index_name=index_name)
 
-query = "Jaki jest kod do alarmu na Teczowej?"
-docs = docsearch.similarity_search(query)
-
-# pass
-
-# embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY)
-# search = Pinecone.from_texts(docs, embeddings, index_name=index_name)
-# query = "questions"
-# docs1 = search.similarity_search(query, include_metadata=True)
 
 llm = OpenAI(temperature=0, openai_api_key=OPENAI_KEY)
 chain = load_qa_chain(llm, chain_type="stuff")
-print(chain.run(input_documents=docs, question=query))
+# print(chain.run(input_documents=docs, question=query))
