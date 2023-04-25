@@ -2,3 +2,5 @@ langchain==0.0.144
 notion_client==2.0.0
 pinecone_client==2.2.1
 python-dotenv==1.0.0
+tiktoken==0.3.3
+openai==0.27.4
