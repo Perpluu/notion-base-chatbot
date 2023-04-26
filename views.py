@@ -8,8 +8,14 @@ from main import loader, docsearch, chain, embeddings
 app = FastAPI()
 
 @app.post("/")
-async def notion_bot(request: Request, text: str = Form()):
+async def notion_bot(request: Request, text: str = Form(), status_code: int = 200):
     query = text.strip()
     docs = docsearch.similarity_search(query)
-    response = chain.run(input_documents=docs, question=query)
+    try:
+        response = await asyncio.wait_for(
+            asyncio.to_thread(chain.run, input_documents=docs, question=query), timeout=3
+        )
+    except asyncio.TimeoutError:
+        return {"text": "It took me too long to respond."}
+    
     return {"text": response}
