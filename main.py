@@ -35,12 +35,7 @@ index_name = PINECONE_IDX
 notion = Client(auth=NOTION_SECRET)
 
 def get_notion_page_loader():
-    """
-    Returns a NotionPage instance initialized with the given secret and page ID.
-    """
-    secret = NOTION_SECRET
-    page = NOTION_PAGE
-    notion_page = NotionPage(secret, page)
+    notion_page = NotionPage(NOTION_SECRET, NOTION_PAGE)
     loader = get_notion_page_loader(NOTION_SECRET, NOTION_PAGE)
     docs = loader.load()
 
